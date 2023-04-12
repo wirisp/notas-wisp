@@ -26,7 +26,7 @@ igualmente a yes
 ```
 use_tunneled_reply = yes
 ```
-- Ahora ve a tu daloradius `IP/daloradius` y agrega a tu usuario este atributo.
+- Ahora ve a tu daloradius `IP/daloradius` y agrega a tu usuario perfil) este atributo `NAS-Identifier`.
 
 Suponiendo que tu mikrotik tiene el identity `Rb01` en `/system identity print` entonces tu NAS-identifier sera `Rb01`
 Agrega el atributo NAS-Identifier al daloradius:
