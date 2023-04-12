@@ -1,4 +1,4 @@
-# notas-wisp
+# Notas-wisp
 Apuntes ,notas ,errores y algunas soluciones de wisp
 
 ## Script de backup automatico en radius
@@ -13,6 +13,11 @@ mkdir -p backupdb && cd backupdb
 ```
 wget https://raw.githubusercontent.com/wirisp/notas-wisp/main/backupdbradius.sh -O backupdbradius.sh
 ```
+- Ahora lo ejecutas con
+```
+./backupdbradius.sh
+```
+
 ## Eliminar usuarios expirados o que iniciaron sesion desde hace ciertos dias por ejemplo 10
 
 Este script busca en la base de datos especificada y tambien en los grupos los usuarios que hayan iniciado sesion hace 10 dias, y los elimina
