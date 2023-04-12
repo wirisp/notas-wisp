@@ -1,0 +1,76 @@
+ 
+mysql -u root -p radius
+SELECT * FROM radcheck;
+
+SELECT username FROM usadas WHERE username = '85';
+
+SELECT username FROM radcheck WHERE username = 'E8RQ';
+DELETE FROM radcheck WHERE username= 'E8RQ';
+SELECT username FROM radacct WHERE username = 'E8RQ';
+DELETE FROM radacct WHERE username= 'E8RQ';
+SELECT username FROM radusergroup WHERE username = 'E8RQ';
+DELETE FROM radusergroup WHERE username= 'E8RQ';
+SELECT username FROM userinfo WHERE username = 'E8RQ';
+DELETE FROM userinfo WHERE username= 'E8RQ';
+
+============================================================================
+
+SELECT username FROM usadas WHERE used = '02:00:00';
+DELETE FROM usadas WHERE used= '02:00:00';
+
+SELECT username FROM usadas WHERE username = 'DEP9';
+DELETE FROM usadas WHERE username= 'DEP9';
+
+
+SELECT used FROM usadas WHERE TIMESTAMP('02:00:00','07:00:00');
+SELECT TIMESTAMP('2009-05-18 22:11:11','1:48:49');
+
+SELECT * FROM usadas WHERE used BETWEEN '02:00:00' AND '03:00:00';
+
+SELECT * FROM usadas WHERE used BETWEEN '02:00:00' AND '20:00:00' and groupname = "2hPausada";
+
+SELECT * FROM usadas WHERE groupname = "2hPausada";
+
+SELECT * FROM usadas WHERE hour(used) > 2 and groupname = "2hPausada";
+
+#Buscar en usadas y en el grupo 2hPausada mayor o igual a 2 horas.
+SELECT * FROM usadas WHERE hour(used) >= 2 and groupname = "2hPausada";
+
+SELECT * FROM usadas WHERE hour(used) >= 2 and groupname = "2hPausada";
+SELECT * FROM usadas WHERE ant BETWEEN '2020-01-01' AND '2023-01-20' and hour(used) <= 2 and groupname = "2hPausada";
+
+SELECT * FROM usadas WHERE date(ant) <= '2020-01-01' and groupname = "2hPausada";
+SELECT * FROM usadas WHERE ant <= DATE_SUB(CURDATE(), INTERVAL 2 WEEK) and groupname = "2hPausada,12hPausada";
+
+SELECT * FROM usadas WHERE ant <= DATE_SUB(CURDATE(), INTERVAL 10 day) and (groupname = "2hPausada" or groupname = "12hPausada");
+
+mysql -uroot -e "use radius; SELECT username FROM usadas WHERE ant <= DATE_SUB(CURDATE(), INTERVAL 10 day) and (groupname = '2hPausada' OR groupname = '12hPausada')" |sort > /tmp/expired.users.txt
+
+
+mysql -uroot -e "use radius; SELECT username FROM usadas WHERE (groupname = '2hPausada' OR groupname = '12hPausada') and ant <= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)" |sort > /tmp/expired.users.txt
+
+### Errores y soluciones posibles
+- Reparar base de datos
+```
+mysql -u -p root radius
+
+REPAIR TABLE TABLE;
+```
+
+
+
+==============================
+mysql -u root -p radius
+SELECT * FROM radcheck;
+
+SELECT username FROM radcheck WHERE username = '85';
+DELETE FROM radcheck WHERE username= '85';
+SELECT * FROM radusergroup;
+SELECT username FROM radusergroup WHERE username = '85';
+DELETE FROM radusergroup WHERE username= '85';
+SELECT username FROM userinfo WHERE username = '85';
+DELETE FROM userinfo WHERE username= '85';
+
+
+SELECT username FROM usadas WHERE used = '02:00:00';
+DELETE FROM usadas WHERE used= '02:00:00';
