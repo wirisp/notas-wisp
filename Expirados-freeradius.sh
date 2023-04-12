@@ -1,9 +1,8 @@
 #!/bin/sh
 #set -x
-# Busca el usuario en la tabla usadas con un inicio de sesion de hace 10 dias o mas y que esten en los grupos especificados.
-# Hace un backup de esos usuarios temporal a un archivo de texto el cual se sobreescribe en la proxima ejecucion.
-# Elimina los usuarios encontrados desde tablas radcheck radacct radusergroup userinfo
-SQLPASS="PasswdDb"
+# This script delets users who have expired 2 months ago. and then delete there records from all tables.
+# Syed Jahanzaib / June 2019
+SQLPASS="niq@84U"
 export MYSQL_PWD=$SQLPASS
 > /tmp/expired.users.txt
 
@@ -16,10 +15,12 @@ cat /tmp/expired.users.txt | while read users
 do
 num=$[$num+1]
 USERNAME=`echo $users | awk '{print $1}'`
-echo "$USERNAME —- user record from all relevant tables"
+echo "$USERNAME"
+mysql -uroot -e "use radius; DELETE FROM userinfo WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radcheck WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radacct WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radusergroup WHERE username = '$USERNAME';"
-mysql -uroot -e "use radius; DELETE FROM userinfo WHERE username = ‘$USERNAME';"
 
 done
+#Copia usuarios a root
+cp /tmp/expired.users.txt /root/exp.txt
