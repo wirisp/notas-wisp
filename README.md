@@ -44,15 +44,23 @@ touch /root/exp.txt
 
 - Creamos una carpeta con el script
 ```
-mkdir -p archivadb && cd archivadb
+mkdir -p scripts
 ```
 - Ahora descargamos el siguiente script y editamos el password de la db 
 ```
-wget https://script.sh -O archivadb.sh
+wget https://script.sh -O /scripts/radacct_trim.sh
 ```
 - Le damos permmisos de ejecucion con `chmod +x *sh` y lo ejecutamos con :
 
 ```
-./archivadb.sh
+./scripts/radacct_trim.sh
 ```
 - Ahora en tu daloradius `http://IP/daloradius/acct-all.php` veras una reduccion.
+- Tambien puedes agregarlo a ejecturase automaticamente con
+```
+export VISUAL=nano; crontab -e
+```
+- y Dentro colocas ,por ejemplo cada dia a las 20 hrs.
+```
+0 20 * * * /scripts/radacct_trim.sh
+```
