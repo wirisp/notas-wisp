@@ -48,7 +48,7 @@ mkdir -p scripts
 ```
 - Ahora descargamos el siguiente script y editamos el password de la db 
 ```
-wget https://script.sh -O /scripts/radacct_trim.sh
+wget https://raw.githubusercontent.com/wirisp/notas-wisp/main/radacct_trim.sh -O /scripts/radacct_trim.sh
 ```
 - Le damos permmisos de ejecucion con `chmod +x *sh` y lo ejecutamos con :
 
