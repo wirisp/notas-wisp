@@ -22,7 +22,8 @@ mysql -uroot -e "use radius; DELETE FROM radacct WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radusergroup WHERE username = '$USERNAME';"
 
 done
-#Copia usuarios a root
+#Copia usuarios a root, por lo cual es archivo debe existir o crearlo con
+# touch /root/scripts/exp.txt
 cp /tmp/expired.users.txt /root/scripts/exp.txt
 # Parte 2 para limpiar la base de datos en radpostauth && raddact
 mysql -uroot -e "use radius; DELETE FROM radpostauth WHERE authdate <= DATE_SUB(CURDATE(), INTERVAL 50 day);"
