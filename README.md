@@ -37,3 +37,22 @@ touch /root/exp.txt
 ```
 ./expirados.sh
 ```
+
+## Archivar conexiones de la tabla Raddact para reducirla
+[x] Se archivaran las conexiones que no contengan datos o sean not null.
+[x] Se crea una nueva tabla si no existe en automatico `radacct_archive`
+
+- Creamos una carpeta con el script
+```
+mkdir -p archivadb && cd archivadb
+```
+- Ahora descargamos el siguiente script y editamos el password de la db 
+```
+wget https://script.sh -O archivadb.sh
+```
+- Le damos permmisos de ejecucion con `chmod +x *sh` y lo ejecutamos con :
+
+```
+./archivadb.sh
+```
+- Ahora en tu daloradius `http://IP/daloradius/acct-all.php` veras una reduccion.
