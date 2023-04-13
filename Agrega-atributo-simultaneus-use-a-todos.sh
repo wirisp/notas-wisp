@@ -1,0 +1,70 @@
+#!/bin/bash
+# Script to ADD & UPDATE 'Simultanous-Use' attribute for ALL USERS of radius database 'radcheck' in mysql.
+# It was useful for a specific situation.
+# Created : 20-Jun-2016
+# Last Modified : 6-NOV-2017
+# By - Syed Jahanzaib
+# https://aacable.wordpress.com aacable at hotmail dot com
+#set -x
+SQLUSER="root"
+SQLPASS="PASSWORD"
+TMPFILE="/tmp/simupdate.txt"
+# Value for SIM Use like it should be 1
+VALUE="1"
+DB="radius"
+SRV="mysql"
+# Check if $SRV (in this case mysql) is running or not, if NOT, then exit the script
+SRVSTATUS=$(pgrep $SRV | wc -l);
+if [ "$SRVSTATUS" -ne 1 ];
+then
+echo "-$SRV is down. Pleasec check your $srv service first.
+Exiting ...";
+exit 1
+else
+echo "-$SRV is accessible OK. Proceeding further ..."
+fi
+# Check if $DB (in this case radius ) is accessible or not, if NOT, then exit the script
+RESULT=`mysql -u $SQLUSER -p$SQLPASS --skip-column-names -e "SHOW DATABASES LIKE '$DB'"`
+if [ "$RESULT" == "$DB" ]; then
+echo "-$DB database exist OK. Proceeding further ..."
+else
+echo "-$DB database does not exist!"
+exit 1
+fi
+ 
+# Start functions , like first create user list
+mysql -u$SQLUSER -p$SQLPASS -e "use radius; select * from radcheck;" > $TMPFILE
+#mysql -uroot -pL*jwM10%$ --skip-column-names -e 'use radius; select * from radcheck where username ="$ID" and value = "1" ;' > $TMPFILE
+echo "
+Updating $SRV / $DB table for missing SIM-USE value. . ."
+# Fetch ID from radcheck table for SIMULTANOUS-USE check
+num=0
+cat $TMPFILE | while read users
+do
+num=$[$num+1]
+ID=`echo $users | awk '{print $2}'`
+SIM_VALUE=`mysql -uroot -p$SQLPASS --skip-column-names -e "use radius; select count(*) from radcheck where username = '$ID';"`
+if [ "$SIM_VALUE" -eq "1" ]; then
+echo "$ID sim value not found, adding now ..."
+mysql -u$SQLUSER -p$SQLPASS -e "INSERT INTO radius.radcheck ( id , username , attribute , op , value ) VALUES ( NULL , '$ID', 'Simultaneous-Use', ':=', '1');"
+#INSERT INTO `radius`.`radcheck` ( `id` , `username` , `attribute` , `op` , `value` ) VALUES ( NULL , 'ZAIBID', 'Simultaneous-Use', ':=', '1' );
+#sleep 3
+fi
+done
+# END
+echo "Waiting for next step, making SIM-USE from 2 to 1"
+#sleep 3
+# Fethch the ID of simultanous-use attribute
+mysql -u$SQLUSER -p$SQLPASS -e "use radius; select * from radcheck;" | grep Simult | awk '{print $2}' > $TMPFILE
+echo "$Updating $SRV / $DB table from Sim -x to sim-1. . ."
+## Fetch ID from radcheck table for SIMULTANOUS-USE check
+num=0
+cat $TMPFILE | while read users
+do
+num=$[$num+1]
+ID=`echo $users | awk '{print $1}'`
+mysql -u$SQLUSER -p$SQLPASS -e "use radius; UPDATE radcheck SET Value = '$VALUE' WHERE (UserName = '$ID' AND Attribute = 'Simultaneous-Use');"
+done
+echo "
+Script End. All Done"
+## END
