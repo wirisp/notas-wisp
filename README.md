@@ -44,15 +44,16 @@ touch /root/exp.txt
 - Creamos una carpeta con el script
 ```
 mkdir -p scripts
+cd scripts
 ```
 - Ahora descargamos el siguiente script y editamos el password de la db 
 ```
-wget https://raw.githubusercontent.com/wirisp/notas-wisp/main/radacct_trim.sh -O /scripts/radacct_trim.sh
+wget https://raw.githubusercontent.com/wirisp/notas-wisp/main/radacct_trim.sh -O radacct_trim.sh
 ```
-- Le damos permmisos de ejecucion con `chmod +x *sh` y lo ejecutamos con :
+- Le damos permisos de ejecucion con `chmod +x *sh` y lo ejecutamos con :
 
 ```
-./scripts/radacct_trim.sh
+./radacct_trim.sh
 ```
 - Ahora en tu daloradius `http://IP/daloradius/acct-all.php` veras una reduccion.
 - Tambien puedes agregarlo a ejecturase automaticamente con
@@ -61,5 +62,5 @@ export VISUAL=nano; crontab -e
 ```
 - y Dentro colocas ,por ejemplo cada dia a las 20 hrs.
 ```
-0 20 * * * /scripts/radacct_trim.sh
+0 20 * * * /root/scripts/radacct_trim.sh
 ```
