@@ -1,4 +1,5 @@
 ## Ejemplo perfil 2 horas pausadas
+- Para los atributos del perfil en **reply** toma los siguientes datos
 ```
 MariaDB [radius]> SELECT * FROM radgroupreply WHERE groupname = '2hPausada';
 +----+-----------+-----------------------+----+---------------------------------------------+
@@ -8,7 +9,9 @@ MariaDB [radius]> SELECT * FROM radgroupreply WHERE groupname = '2hPausada';
 | 30 | 2hPausada | Acct-Interim-Interval | := | 60                                          |
 +----+-----------+-----------------------+----+---------------------------------------------+
 2 rows in set (0.001 sec)
-
+```
+- Para los atributos del perfil en **check** toma los siguientes datos
+```
 MariaDB [radius]> SELECT * FROM radgroupcheck WHERE groupname = '2hPausada';
 +----+-----------+------------------+----+-------+
 | id | groupname | attribute        | op | value |
@@ -20,6 +23,7 @@ MariaDB [radius]> SELECT * FROM radgroupcheck WHERE groupname = '2hPausada';
 ```
 ## Ejemplo Perfil 1 Mes corrido
 Este perfil lo utilizo al crear vouchers mensuales de un solo uso.
+- Para los atributos del perfil en **reply** toma los siguientes datos
 ```
 MariaDB [radius]> SELECT * FROM radgroupreply WHERE groupname = 'MENSUAL-1USO';
 +----+--------------+-----------------------+----+---------------------------------------------+
@@ -29,7 +33,10 @@ MariaDB [radius]> SELECT * FROM radgroupreply WHERE groupname = 'MENSUAL-1USO';
 | 26 | MENSUAL-1USO | Acct-Interim-Interval | := | 60                                          |
 +----+--------------+-----------------------+----+---------------------------------------------+
 2 rows in set (0.001 sec)
+```
+- Para los atributos del perfil en **check** toma los siguientes datos
 
+```
 MariaDB [radius]> SELECT * FROM radgroupcheck WHERE groupname = 'MENSUAL-1USO';
 +----+--------------+------------------+----+---------+
 | id | groupname    | attribute        | op | value   |
@@ -41,7 +48,7 @@ MariaDB [radius]> SELECT * FROM radgroupcheck WHERE groupname = 'MENSUAL-1USO';
 ```
 ## Ejemplo Perfil Mensual recurrente
 Este perfil me funciona para clientes a los cuales les vendo una mensualidad para un dispocitivo y la necesito renovar, ya que le creo un usuario y password personalizado.
-- Se crea el perfil con los siguientes datos o atributos (radgroupcheck se refiere a atributos check) y (radgroupreply a los reply).
+- Se crea el perfil con los siguientes datos o atributos (radgroupcheck se refiere a atributos **check**) y (radgroupreply a los **reply**).
 
 ```
 MariaDB [radius]> SELECT * FROM radgroupcheck WHERE groupname = '30dMensual';
