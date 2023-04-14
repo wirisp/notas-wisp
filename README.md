@@ -1,4 +1,4 @@
-# Notas-wisp
+## Notas-wisp
 Apuntes ,notas ,errores y algunas soluciones de wisp
 
 ## Script de backup automatico en radius
@@ -39,8 +39,7 @@ touch /root/exp.txt
 ```
 
 ## Archivar conexiones de la tabla Raddact para reducirla
-[x] Se archivaran las conexiones que no contengan datos o sean not null.
-[x] Se crea una nueva tabla si no existe en automatico `radacct_archive`
+[x] Se archivaran las conexiones que posterioresa X dias. (cambiar X dias en el script)
 
 - Creamos una carpeta con el script
 ```
