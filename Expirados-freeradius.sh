@@ -20,6 +20,7 @@ mysql -uroot -e "use radius; DELETE FROM userinfo WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radcheck WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radacct WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radusergroup WHERE username = '$USERNAME';"
+mysql -uroot -e "use radius; DELETE FROM userbillinfo WHERE username = '$USERNAME';"
 
 done
 #Copia usuarios a root
