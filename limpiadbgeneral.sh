@@ -6,8 +6,6 @@ SQLPASS="84Uniq@"
 export MYSQL_PWD=$SQLPASS
 > /tmp/expired.users.txt
 
-#mysql -uroot -e “use radius; select username from rm_users where expiration BETWEEN ‘2010-01-01’ AND ‘2019-04-30’;” |sort > /tmp/expired.users.txt
-
 # Fetch users who have expired 2 months ago & before, (using expired date), BE CAREFUL WHEN USING THIS
 mysql -uroot -e "use radius; SELECT username FROM usadas WHERE ant <= DATE_SUB(CURDATE(), INTERVAL 10 day) and (groupname = '2hPausada' OR groupname = '12hPausada')" |sort > /tmp/expired.users.txt
 num=0
