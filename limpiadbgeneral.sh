@@ -1,8 +1,8 @@
 #!/bin/sh
 #set -x
-# Este script utiliza esta creado con los scripts senalados en este repositorio, es una union en uno solo
-# Elimina usuarios con vigenvcia de 10 dias, limpia las bases de datos de hace 50 dias
-SQLPASS="PASSSWDB"
+# Este script elimina fichas de hace 10 dias de uso, y tambien limpia las bases de datos de hace 30 dias.
+# Syed Jahanzaib / June 2019
+SQLPASS="84Uniq@"
 export MYSQL_PWD=$SQLPASS
 > /tmp/expired.users.txt
 
@@ -20,12 +20,14 @@ mysql -uroot -e "use radius; DELETE FROM userinfo WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radcheck WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radacct WHERE username = '$USERNAME';"
 mysql -uroot -e "use radius; DELETE FROM radusergroup WHERE username = '$USERNAME';"
+mysql -uroot -e "use radius; DELETE FROM userbillinfo WHERE username = '$USERNAME';"
 
 done
-#Copia usuarios a root, por lo cual es archivo debe existir o crearlo con
-# touch /root/scripts/exp.txt
+#Copia usuarios a root
 cp /tmp/expired.users.txt /root/scripts/exp.txt
 # Parte 2 para limpiar la base de datos en radpostauth && raddact
 mysql -uroot -e "use radius; DELETE FROM radpostauth WHERE authdate <= DATE_SUB(CURDATE(), INTERVAL 50 day);"
 mysql -uroot -e "use radius; DELETE FROM radacct WHERE acctstarttime <= DATE_SUB(CURDATE(), INTERVAL 50 day);"
+mysql -uroot -e "use radius; DELETE FROM userbillinfo WHERE creationdate <= DATE_SUB(CURDATE(), INTERVAL 30 day);"
+mysql -uroot -e "use radius; DELETE FROM radpostauth WHERE authdate <= DATE_SUB(CURDATE(), INTERVAL 30 day);"
 echo "Base de datos limpiada correctamente"
