@@ -7,7 +7,7 @@ export MYSQL_PWD=$SQLPASS
 > /tmp/expired.users.txt
 
 # extrae y despues elimina las fichas de hace 10 dias de haberlas introducido a un dispocitivo y de los perfiles 2hPausada y 12hPasauada
-mysql -uroot -e "use radius; SELECT username FROM usadas WHERE ant <= DATE_SUB(CURDATE(), INTERVAL 10 day) and (groupname = '2hPausada' OR groupname = '12hPausada')" |sort > /tmp/expired.users.txt
+mysql -uroot -e "use radius; SELECT username FROM usadas WHERE min <= DATE_SUB(CURDATE(), INTERVAL 10 day) and (groupname = '2hPausada' OR groupname = '12hPausada')" |sort > /tmp/expired.users.txt
 num=0
 cat /tmp/expired.users.txt | while read users
 do
