@@ -155,7 +155,8 @@ El valor es de acuerdo a la fecha de finalizacion del usuario, por ejemplo `2023
 - Crear una carpeta para guardar los backups
 
 ```
-mkdir -p backupdb && cd backupdb
+mkdir -p backupdb && mkdir -p scripts
+cd scripts
 ```
 
 - Descargar el archivo ,cambiarle dentro el password de la base de datos, asi como el lugar la ruta `backupfolder="/root/backupdb/"`
@@ -167,6 +168,15 @@ wget https://raw.githubusercontent.com/wirisp/notas-wisp/main/backupdbradius.sh 
 ```
 ./backupdbradius.sh
 ```
+### Agregarlo a crontab
+```
+export VISUAL=nano; crontab -e
+```
+- Despues en el editor hasta el final agrega
+
+  ```
+  0 10 * * * sudo bash /root/scripts/backupdbradius.sh
+  ```
 
 ## Script limpiadb.sh
 - Toma los usuarios de las fichas desde la tabla `usadas` ; la base de datos usada para daloradius es la que se encuentra en este repositorio llamada `dbname.sql` por lo que puedes importarla a tu daloradius, recuerda hacer un backup de tu anterior.
