@@ -1,4 +1,4 @@
-- Hay veces que apachemarca error al ejecutarse por lo que debemos:
+- Hay veces que apachemarca error en el puerto 80 al ejecutarse (posiblemente por lighttpd por lo que debemos:
 - detenerlo
 - Buscar el PID que esta ofuscado a eliminar
 - eliminarlo
