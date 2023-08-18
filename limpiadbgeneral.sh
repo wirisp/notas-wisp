@@ -29,3 +29,6 @@ mysql -uroot -e "use radius; DELETE FROM radacct WHERE acctstarttime <= DATE_SUB
 mysql -uroot -e "use radius; DELETE FROM userbillinfo WHERE creationdate <= DATE_SUB(CURDATE(), INTERVAL 30 day);"
 mysql -uroot -e "use radius; DELETE FROM radpostauth WHERE authdate <= DATE_SUB(CURDATE(), INTERVAL 30 day);"
 echo "Base de datos limpiada correctamente"
+#crontab -e nano
+#0 10 * * * sudo bash /root/scripts/backupdbradius.sh
+#0 20 * * * sudo bash /root/scripts/limpiafichas.sh
