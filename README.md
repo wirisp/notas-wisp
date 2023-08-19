@@ -150,6 +150,39 @@ MariaDB [radius]> SELECT * FROM radgroupreply WHERE groupname = '30dMensual';
 El atributo agregado es : `WISPr-Session-Terminate-Time`
 El valor es de acuerdo a la fecha de finalizacion del usuario, por ejemplo `2023-12-24T17:00:00` esta finaliza el 24 de diciembre de 2023 a las 5 pm.
 5. Das click en apply.
+## Listado de usuarios por grupo
+
+```
+
+MariaDB [radius]> SELECT * FROM radusergroup WHERE groupname = '30dMensual';
++------------+------------+----------+
+| username   | groupname  | priority |
++------------+------------+----------+
+| ABI        | 30dMensual |        0 |
+| ABEL       | 30dMensual |        0 |
+| TACO2      | 30dMensual |        0 |
+| RIVERA     | 30dMensual |        0 |
+| CHELELO    | 30dMensual |        0 |
+| SALVADOR1  | 30dMensual |        0 |
+| ESTEBAN2   | 30dMensual |        0 |
+| CHANTE2    | 30dMensual |        0 |
+| GUTI3      | 30dMensual |        0 |
+```
+- Alternativamente
+
+```
+MariaDB [radius]>  SELECT * FROM usadas WHERE groupname = '30dMensual';
++------------+------------+---------------------+---------------------+------------+-----------+
+| username   | groupname  | min                 | max                 | ant        | used      |
++------------+------------+---------------------+---------------------+------------+-----------+
+| ABEL       | 30dMensual | 2023-07-20 09:13:38 | 2023-08-19 12:44:07 | 2023-08-19 | 72:17:16  |
+| ABI        | 30dMensual | 1970-01-01 18:30:28 | 2023-08-18 20:32:15 | 2023-08-18 | 210:21:03 |
+| ANGEL1     | 30dMensual | 2023-07-19 08:34:15 | 2023-08-19 12:19:14 | 2023-08-19 | 179:51:02 |
+| ANGELES    | 30dMensual | 1970-01-01 18:04:22 | 2023-08-18 23:51:18 | 2023-08-18 | 50:17:03  |
+| AZIEL1     | 30dMensual | 1970-01-02 01:11:58 | 2023-08-18 16:00:30 | 2023-08-18 | 505:47:54 |
+| BOLI1      | 30dMensual | 1970-01-01 18:07:24 | 2023-08-18 23:37:35 | 2023-08-18 | 791:23:38 |
+| CARLA      | 30dMensual | 2023-07-19 00:04:51 | 2023-08-18 12:20:36 | 2023-08-18 | 424:28:59 |
+```
 
 ## Script de backup automatico en radius
 - Crear una carpeta para guardar los backups
