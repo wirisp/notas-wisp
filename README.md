@@ -4,6 +4,10 @@ Apuntes ,notas ,errores y algunas soluciones de wisp
 ## Uso de la base de datos de ejemplo `dbname.sql`
 Esta base de datos cuenta con las siguientes tablas
 ```
+mysql -u root -p radius
+```
+
+```
 MariaDB [radius]> show tables;
 +------------------------+
 | Tables_in_radius       |
