@@ -2,7 +2,7 @@
 #set -x
 # Este script elimina fichas de hace 10 dias de uso, y tambien limpia las bases de datos de hace 30 dias.
 # Syed Jahanzaib / June 2019
-SQLPASS="84Uniq@"
+SQLPASS="Uniq@"
 export MYSQL_PWD=$SQLPASS
 > /tmp/expired.users.txt
 
