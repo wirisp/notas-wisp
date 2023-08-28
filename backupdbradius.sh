@@ -1,6 +1,6 @@
 #! /bin/bash
 username=root
-password=84Uniq@
+password=Uniq@
 database=radius
 now="$(date +'%d_%m_%Y_%H_%M_%S')"
 filename="base_$now".gz
