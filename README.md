@@ -301,3 +301,7 @@ export VISUAL=nano; crontab -e
 ```
 0 20 * * * /root/scripts/radacct_trim.sh
 ```
+## Buscar dentro de servidor
+```
+grep -rl "8.8.8.8" /etc
+```
