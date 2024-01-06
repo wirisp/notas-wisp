@@ -1,4 +1,4 @@
-- Hay veces que apachemarca error en el puerto 80 al ejecutarse (posiblemente por lighttpd por lo que debemos:
+- Hay veces que apachemarca error en el puerto 80 al ejecutarse (posiblemente por lighttpd que este usando el mismo puerto por lo que debemos cambiarle el puerto a lighttpd o a lo que lo este usando, pero tambien podemos hacer lo siguiente:
 - detenerlo
 - Buscar el PID que esta ofuscado a eliminar
 - eliminarlo
