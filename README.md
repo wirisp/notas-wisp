@@ -305,3 +305,10 @@ export VISUAL=nano; crontab -e
 ```
 grep -rl "8.8.8.8" /etc
 ```
+## Exporta importa ase de datos
+
+```
+mysqldump -p -u root radius > dbname.sql
+## Restaurar db
+mysql -p -u root radius < dbname.sql
+```
